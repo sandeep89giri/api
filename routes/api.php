@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/* Target class controller does not exist - Laravel 8 then use billow options Or write this 
+|  protected $namespace = 'App\Http\Controllers' in RouteServiceProvider php file
+|
+*/
+
+//Route::Resource('/products','App\Http\Controllers\ProductController');
+Route::apiResource('/products','ProductController');
+
+Route::group(['prefix'=>'products'],function(){
+	Route::apiResource('/{product}/reviews','ReviewController');
+});
